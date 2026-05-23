@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rabiul Awal Sayeed | Civil Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #080c14;
+      --surface:  #0e1521;
+      --card:     #131d2e;
+      --border:   #1e2d45;
+      --gold:     #d4a843;
+      --gold2:    #f0c060;
+      --cyan:     #38bdf8;
+      --text:     #e8edf5;
+      --muted:    #6b7fa3;
+      --white:    #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease, width 0.3s, height 0.3s;
+      opacity: 0.5;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1; opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 6%;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 3px; color: var(--white);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      text-decoration: none; color: var(--muted);
+      font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 1px;
+      color: var(--bg); background: var(--gold);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 6% 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* Animated grid background */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(212,168,67,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,67,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    /* Glowing orb */
+    .hero-orb {
+      position: absolute; top: 10%; right: 5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-orb2 {
+      position: absolute; bottom: 5%; left: -5%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-eyebrow::before { content: '//'; opacity: 0.5; }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.92; letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .hero-name .gold { color: var(--gold); }
+    .hero-name .outline {
+      -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+      color: transparent;
+    }
+
+    .hero-title {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--cyan); letter-spacing: 2px;
+      margin-bottom: 1.8rem; opacity: 0.9;
+    }
+
+    .hero-desc {
+      color: var(--muted); font-size: 1.05rem;
+      line-height: 1.9; max-width: 560px;
+      margin-bottom: 2.5rem; font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-gold {
+      background: var(--gold); color: var(--bg);
+      padding: 0.9rem 2.2rem; font-weight: 600;
+      font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text);
+      padding: 0.9rem 2.2rem; font-size: 0.82rem;
+      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-socials {
+      position: absolute; right: 6%; bottom: 4rem;
+      display: flex; flex-direction: column; gap: 1.2rem; align-items: center;
+      z-index: 2;
+    }
+    .hero-socials::before, .hero-socials::after {
+      content: ''; width: 1px; height: 60px; background: var(--border);
+    }
+    .social-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      writing-mode: vertical-rl;
+      transition: color 0.3s;
+    }
+    .social-link:hover { color: var(--gold); }
+
+    .hero-scroll {
+      position: absolute; left: 6%; bottom: 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); display: flex; align-items: center; gap: 1rem;
+      z-index: 2;
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--border);
+      position: relative; overflow: hidden;
+    }
+    .scroll-line::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%; background: var(--gold);
+      animation: scrollAnim 2s ease infinite;
+    }
+    @keyframes scrollAnim {
+      to { left: 100%; }
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 8rem 6%;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem;
+      align-items: center; background: var(--surface);
+      position: relative;
+    }
+    .about-left { position: relative; }
+    .about-avatar-wrap {
+      width: 100%; max-width: 380px;
+      aspect-ratio: 3/4;
+      background: var(--card);
+      position: relative;
+      border: 1px solid var(--border);
+    }
+    .about-avatar-wrap::before {
+      content: '';
+      position: absolute; inset: -8px;
+      border: 1px solid var(--gold); opacity: 0.3;
+      z-index: -1;
+    }
+    .about-avatar-wrap::after {
+      content: 'R.A.S';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem; color: var(--gold); opacity: 0.08;
+      letter-spacing: 5px;
+    }
+    .avatar-inner {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .avatar-initials {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; color: var(--gold); letter-spacing: 4px; line-height: 1;
+    }
+    .avatar-flag {
+      font-size: 2rem; margin-top: 0.5rem;
+    }
+    .avatar-uni {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 2px; color: var(--muted);
+      text-transform: uppercase; text-align: center; padding: 0 1rem;
+      margin-top: 0.5rem;
+    }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--gold); color: var(--bg);
+      padding: 1rem 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 2px; text-align: center;
+      line-height: 1.3;
+    }
+
+    .about-right {}
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before { content: '//'; opacity: 0.5; }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: 0.95; letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .about-right p {
+      color: var(--muted); font-size: 0.98rem; line-height: 1.9;
+      margin-bottom: 1rem; font-weight: 300;
+    }
+    .about-details {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .detail-item {
+      border-left: 2px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .detail-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .detail-val { font-size: 0.92rem; color: var(--text); font-weight: 500; }
+
+    /* ── SKILLS ── */
+    .skills {
+      padding: 8rem 6%;
+      background: var(--bg);
+      position: relative;
+    }
+    .skills-watermark {
+      position: absolute; top: 3rem; right: 4%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem; color: rgba(255,255,255,0.02);
+      letter-spacing: 5px; user-select: none; pointer-events: none;
+    }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); margin-top: 4rem;
+    }
+    .skill-card {
+      background: var(--bg); padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .skill-card:hover { background: var(--card); }
+    .skill-card::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; width: 3px; height: 0;
+      background: var(--gold); transition: height 0.4s;
+    }
+    .skill-card:hover::after { height: 100%; }
+    .skill-icon {
+      font-size: 2rem; margin-bottom: 1rem; display: block;
+    }
+    .skill-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 0.8rem;
+      color: var(--white);
+    }
+    .skill-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 1px;
+      background: var(--border); color: var(--muted);
+      padding: 0.3rem 0.7rem;
+    }
+
+    /* Proficiency bars */
+    .prof-list { margin-top: 4rem; }
+    .prof-item { margin-bottom: 1.8rem; }
+    .prof-header {
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .prof-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text);
+    }
+    .prof-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; color: var(--gold);
+    }
+    .prof-bar {
+      height: 3px; background: var(--border); position: relative;
+    }
+    .prof-fill {
+      height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2));
+      position: relative;
+      animation: fillBar 1.5s ease forwards;
+      transform-origin: left;
+    }
+    @keyframes fillBar {
+      from { width: 0 !important; }
+    }
+
+    /* ── EDUCATION ── */
+    .education {
+      padding: 8rem 6%;
+      background: var(--surface);
+    }
+    .edu-timeline { margin-top: 4rem; position: relative; }
+    .edu-timeline::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .edu-item {
+      padding-left: 3rem; margin-bottom: 3rem;
+      position: relative;
+    }
+    .edu-item::before {
+      content: ''; position: absolute;
+      left: -5px; top: 6px;
+      width: 11px; height: 11px;
+      background: var(--gold); border-radius: 0;
+      transform: rotate(45deg);
+    }
+    .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .edu-item h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 0.3rem;
+    }
+    .edu-item h4 {
+      font-size: 0.9rem; color: var(--cyan); font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+    .edu-item p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 8rem 6%;
+      background: var(--bg);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .contact-left h2.section-title { margin-bottom: 1.2rem; }
+    .contact-left p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 2.5rem; }
+    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card {
+      display: flex; gap: 1.2rem; align-items: center;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem; text-decoration: none;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .contact-card:hover { border-color: var(--gold); transform: translateX(4px); }
+    .cc-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .cc-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.2rem;
+    }
+    .cc-val { font-size: 0.9rem; color: var(--text); font-weight: 500; word-break: break-all; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 0.9rem 1rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      background: var(--gold); color: var(--bg); border: none;
+      padding: 1rem 2.2rem; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; letter-spacing: 3px; cursor: pointer;
+      transition: background 0.3s; align-self: flex-start;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .form-submit:hover { background: var(--gold2); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #040609;
+      padding: 2.5rem 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem; letter-spacing: 3px;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { color: var(--muted); font-size: 0.78rem; font-family: 'DM Mono', monospace; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
+      font-family: 'DM Mono', monospace; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.6s 0.1s both; }
+    .hero-name    { animation: fadeUp 0.7s 0.25s both; }
+    .hero-title   { animation: fadeUp 0.6s 0.4s both; }
+    .hero-desc    { animation: fadeUp 0.6s 0.5s both; }
+    .hero-actions { animation: fadeUp 0.6s 0.6s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav .nav-links, nav .nav-badge { display: none; }
+      .hero-socials { display: none; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-avatar-wrap { max-width: 280px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">R<span>.</span>A<span>.</span>S</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:sayeedrabiulawal@gmail.com" class="nav-badge">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Civil Engineering Portfolio &nbsp;·&nbsp; Bangladesh 🇧🇩</div>
+    <h1 class="hero-name">
+      <span class="gold">Rabiul</span><br>
+      Awal<br>
+      <span class="outline">Sayeed</span>
+    </h1>
+    <div class="hero-title">Civil Engineering Student &nbsp;|&nbsp; Structural Analysis &amp; Infrastructure Design &nbsp;|&nbsp; AutoCAD &amp; Revit</div>
+    <p class="hero-desc">
+      Passionate civil engineering student at Hebei University of Science and Technology, China. Specializing in structural analysis, BIM modeling, and sustainable infrastructure design — bridging theory with real-world engineering solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Get In Touch</a>
+      <a href="https://www.behance.net/rabiulawalsayeed" target="_blank" class="btn-ghost">View Portfolio →</a>
+    </div>
+  </div>
+
+  <div class="hero-socials">
+    <a href="https://www.linkedin.com/in/rabiul-awal-sayeed-0919563bb" target="_blank" class="social-link">LinkedIn</a>
+    <a href="https://www.behance.net/rabiulawalsayeed" target="_blank" class="social-link">Behance</a>
+    <a href="mailto:sayeedrabiulawal@gmail.com" class="social-link">Email</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll Down
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <div class="about-avatar-wrap">
+      <div class="avatar-inner">
+        <div class="avatar-initials">RAS</div>
+        <div class="avatar-flag">🇧🇩</div>
+        <div class="avatar-uni">Hebei University of<br>Science & Technology</div>
+      </div>
+    </div>
+    <div class="about-badge">Civil<br>Engineer</div>
+  </div>
+  <div class="about-right">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">Engineering<br>The Future</h2>
+    <p>I'm Rabiul Awal Sayeed, a civil engineering student from Bangladesh currently studying at Hebei University of Science and Technology in Shijiazhuang, China. My passion lies in designing resilient structures and infrastructure that serve communities for generations.</p>
+    <p>With hands-on proficiency in industry-standard tools like AutoCAD, Revit, and BIM workflows, I bring both technical precision and creative problem-solving to every project. I'm driven by the belief that great engineering is both an art and a science.</p>
+    <div class="about-details">
+      <div class="detail-item">
+        <div class="detail-label">Full Name</div>
+        <div class="detail-val">Rabiul Awal Sayeed</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Nationality</div>
+        <div class="detail-val">Bangladeshi 🇧🇩</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">University</div>
+        <div class="detail-val">Hebei Univ. of Science & Tech.</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Location</div>
+        <div class="detail-val">Shijiazhuang, Hebei, China</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Email</div>
+        <div class="detail-val" style="font-size:0.78rem">sayeedrabiulawal@gmail.com</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Phone / WeChat</div>
+        <div class="detail-val">+86 156 1419 5283</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="skills-watermark">SKILLS</div>
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Technical<br>Capabilities</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="skill-icon">🏗️</span>
+      <h3>Structural Analysis</h3>
+      <p>Advanced structural design, load calculation, seismic analysis, and safety assessment for buildings and infrastructure.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Load Analysis</span>
+        <span class="skill-tag">Seismic Design</span>
+        <span class="skill-tag">RC Structures</span>
+        <span class="skill-tag">Steel Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">📐</span>
+      <h3>AutoCAD</h3>
+      <p>Proficient in 2D drafting, technical drawings, construction plans, and detailed engineering documentation using AutoCAD.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">2D Drafting</span>
+        <span class="skill-tag">Construction Docs</span>
+        <span class="skill-tag">Site Plans</span>
+        <span class="skill-tag">Detail Drawings</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🏢</span>
+      <h3>Revit & BIM</h3>
+      <p>Building Information Modeling with Revit for 3D structural models, coordination, clash detection, and project documentation.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">3D Modeling</span>
+        <span class="skill-tag">BIM Workflow</span>
+        <span class="skill-tag">Clash Detection</span>
+        <span class="skill-tag">Revit Structure</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🌉</span>
+      <h3>Infrastructure Design</h3>
+      <p>Design and planning of roads, bridges, drainage systems, and public infrastructure for sustainable development.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Road Design</span>
+        <span class="skill-tag">Bridge Engineering</span>
+        <span class="skill-tag">Drainage</span>
+        <span class="skill-tag">Site Planning</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🧱</span>
+      <h3>Geotechnical Engineering</h3>
+      <p>Foundation design, soil mechanics, bearing capacity analysis, and subsurface investigation for construction projects.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Soil Mechanics</span>
+        <span class="skill-tag">Foundation Design</span>
+        <span class="skill-tag">Site Investigation</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">💧</span>
+      <h3>Hydraulics & Hydrology</h3>
+      <p>Water flow analysis, stormwater management, irrigation systems, and flood risk assessment for civil projects.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Stormwater Mgmt</span>
+        <span class="skill-tag">Flood Analysis</span>
+        <span class="skill-tag">Irrigation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proficiency bars -->
+  <div class="prof-list" style="margin-top:4rem; max-width:700px;">
+    <div class="section-label" style="margin-bottom:2rem;">Software Proficiency</div>
+    <div class="prof-item">
+      <div class="prof-header"><span class="prof-name">AutoCAD</span><span class="prof-pct">90%</span></div>
+      <div class="prof-bar"><div class="prof-fill" style="width:90%"></div></div>
+    </div>
+    <div class="prof-item">
+      <div class="prof-header"><span class="prof-name">Revit</span><span class="prof-pct">85%</span></div>
+      <div class="prof-bar"><div class="prof-fill" style="width:85%"></div></div>
+    </div>
+    <div class="prof-item">
+      <div class="prof-header"><span class="prof-name">BIM Workflow</span><span class="prof-pct">80%</span></div>
+      <div class="prof-bar"><div class="prof-fill" style="width:80%"></div></div>
+    </div>
+    <div class="prof-item">
+      <div class="prof-header"><span class="prof-name">Structural Analysis</span><span class="prof-pct">88%</span></div>
+      <div class="prof-bar"><div class="prof-fill" style="width:88%"></div></div>
+    </div>
+    <div class="prof-item">
+      <div class="prof-header"><span class="prof-name">Infrastructure Design</span><span class="prof-pct">82%</span></div>
+      <div class="prof-bar"><div class="prof-fill" style="width:82%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education &<br>Training</h2>
+  <div class="edu-timeline">
+    <div class="edu-item">
+      <div class="edu-year">2021 — Present</div>
+      <h3>Bachelor of Civil Engineering</h3>
+      <h4>Hebei University of Science and Technology — Shijiazhuang, Hebei, China</h4>
+      <p>Studying core civil engineering disciplines including structural mechanics, geotechnical engineering, hydraulics, construction materials, and infrastructure planning. Actively applying BIM and CAD tools in academic projects.</p>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Certification</div>
+      <h3>AutoCAD Professional</h3>
+      <h4>2D/3D Drafting & Technical Documentation</h4>
+      <p>Advanced proficiency in AutoCAD for civil engineering drawings, construction plans, and technical documentation.</p>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Certification</div>
+      <h3>Revit & BIM Specialist</h3>
+      <h4>Building Information Modeling</h4>
+      <p>Hands-on experience with Autodesk Revit for structural BIM modeling, coordination across disciplines, and modern construction documentation workflows.</p>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">Bangladesh</div>
+      <h3>Higher Secondary Certificate (HSC)</h3>
+      <h4>Science — Bangladesh</h4>
+      <p>Completed secondary education in Bangladesh with a science background, building the foundation for engineering studies in China.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Work<br><span style="color:var(--gold)">Together</span></h2>
+    <p>I'm open to internships, collaborative projects, freelance work, and engineering opportunities. Feel free to reach out — I'd love to connect!</p>
+    <div class="contact-cards">
+      <a href="mailto:sayeedrabiulawal@gmail.com" class="contact-card">
+        <div class="cc-icon">✉️</div>
+        <div>
+          <div class="cc-label">Email</div>
+          <div class="cc-val">sayeedrabiulawal@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+8615614195283" class="contact-card">
+        <div class="cc-icon">📱</div>
+        <div>
+          <div class="cc-label">Phone / WeChat</div>
+          <div class="cc-val">+86 156 1419 5283</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/rabiul-awal-sayeed-0919563bb" target="_blank" class="contact-card">
+        <div class="cc-icon">💼</div>
+        <div>
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-val">Rabiul Awal Sayeed</div>
+        </div>
+      </a>
+      <a href="https://www.behance.net/rabiulawalsayeed" target="_blank" class="contact-card">
+        <div class="cc-icon">🎨</div>
+        <div>
+          <div class="cc-label">Portfolio — Behance</div>
+          <div class="cc-val">behance.net/rabiulawalsayeed</div>
+        </div>
+      </a>
+      <div class="contact-card" style="cursor:default;">
+        <div class="cc-icon">📍</div>
+        <div>
+          <div class="cc-label">Location</div>
+          <div class="cc-val">Shijiazhuang Shi, Hebei, China</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-label" style="margin-bottom:1.5rem;">Send a Message</div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Doe"/>
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" placeholder="john@example.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" placeholder="Internship Opportunity / Project Collaboration"/>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell me about your project or opportunity..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Message sent! Rabiul will get back to you soon.')">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">R<span>.</span>A<span>.</span>S</div>
+  <div class="footer-copy">© 2026 Rabiul Awal Sayeed · Civil Engineer · Bangladesh 🇧🇩</div>
+  <div class="footer-links">
+    <a href="https://www.behance.net/rabiulawalsayeed" target="_blank">Behance</a>
+    <a href="https://www.linkedin.com/in/rabiul-awal-sayeed-0919563bb" target="_blank">LinkedIn</a>
+    <a href="mailto:sayeedrabiulawal@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top  = e.clientY + 'px';
+    }, 80);
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '50px'; ring.style.height = '50px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+</script>
+</body>
+</html>
